@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>VTU Diary Generator</title>
+
+    <style>
+      body {
+        font-family: Arial;
+        max-width: 800px;
+        margin: 50px auto;
+        line-height: 1.6;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .card {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      input {
+        margin-top: 10px;
+      }
+
+      button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>VTU Internship Diary Generator</h1>
+
+    <div class="card">
+      <h3>About</h3>
+      <p>
+        This tool converts VTU internship diary JSON data into a professional
+        PDF format with:
+      </p>
+      <ul>
+        <li>Exactly 3 entries per page</li>
+        <li>One-line work summary</li>
+        <li>One-line learning outcome</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Upload JSON File</h3>
+      <input type="file" id="fileInput" accept=".json" />
+      <br />
+      <button onclick="handleUpload()">Generate Diary</button>
+    </div>
+
+    <script>
+      function handleUpload() {
+        const file = document.getElementById("fileInput").files[0];
+
+        if (!file) {
+          alert("Please select a JSON file");
+          return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function () {
+          // Store data temporarily
+          localStorage.setItem("diaryData", reader.result);
+
+          // Navigate to viewer page
+          window.location.href = "viewer.html";
+        };
+
+        reader.readAsText(file);
+      }
+    </script>
+  </body>
+</html>
