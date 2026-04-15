@@ -45,9 +45,9 @@
         PDF format with:
       </p>
       <ul>
-        <li>Exactly 3 entries per page</li>
-        <li>One-line work summary</li>
-        <li>One-line learning outcome</li>
+        <li>Variable entries per page</li>
+        <li>Adaptive text (1-2 sentences)</li>
+        <li>Balanced and print-ready layout</li>
       </ul>
     </div>
 
@@ -59,6 +59,7 @@
     </div>
 
     <script>
+      // Handles file upload and navigation to viewer page
       function handleUpload() {
         const file = document.getElementById("fileInput").files[0];
 
@@ -70,10 +71,10 @@
         const reader = new FileReader();
 
         reader.onload = function () {
-          // Store data temporarily
+          // Store uploaded JSON temporarily in localStorage
           localStorage.setItem("diaryData", reader.result);
 
-          // Navigate to viewer page
+          // Redirect to viewer for rendering
           window.location.href = "viewer.html";
         };
 

@@ -131,25 +131,14 @@
     <div id="output"></div>
 
     <button class="print-btn" onclick="window.print()">
-      🖨️ Print / Save as PDF
+      Print / Save as PDF
     </button>
 
     <script>
-      // function formatText(text) {
-      //   if (!text) return "";
-
-      //   const cleaned = String(text)
-      //     .replace(/\n/g, " ")
-      //     .replace(/\s+/g, " ")
-      //     .trim();
-
-      //   // Split into sentences
-      //   const sentences = cleaned.split(/(?<=[.?!])\s+/);
-
-      //   // Take first 2 sentences
-      //   return sentences.slice(0, 2).join(" ");
-      // }
-
+      // Formats text to ensure layout stability:
+      // - Cleans whitespace
+      // - Extracts up to 2 sentences
+      // - Falls back to 1 sentence if content is too long
       function formatText(text) {
         if (!text) return "";
 
@@ -171,6 +160,8 @@
         return two;
       }
 
+      // Splits entries into fixed-size pages
+      // Each page contains a variable number of entries (4)
       function chunk(arr, size) {
         const res = [];
         for (let i = 0; i < arr.length; i += size) {
@@ -179,6 +170,7 @@
         return res;
       }
 
+      // Retrieve previously uploaded JSON data from localStorage
       const raw = localStorage.getItem("diaryData");
 
       if (!raw) {
@@ -187,6 +179,8 @@
       } else {
         const data = JSON.parse(raw);
 
+        // Normalize entries for rendering
+        // Applies adaptive text formatting to maintain layout consistency
         const entries = data.map((e) => ({
           date: e.date,
           hours: e.hours,
@@ -194,8 +188,11 @@
           learning: formatText(e.learnings),
         }));
 
+        // Group entries into pages for PDF layout
         const pages = chunk(entries, 4);
 
+        // Generate HTML structure for each page
+        // Includes table layout and signature section
         const html = pages
           .map(
             (page) => `

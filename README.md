@@ -22,6 +22,14 @@ The entire workflow runs inside the browser with no installation or external dep
 
 ---
 
+## Demo Video
+
+Click below to watch the full walkthrough:
+
+[![Watch the demo](https://img.youtube.com/vi/Qqy61P2YOmM/maxresdefault.jpg)](https://youtu.be/Qqy61P2YOmM)
+
+---
+
 ## Features
 
 ### Data Extraction
